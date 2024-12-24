@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Recommender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        #recommendations {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Anime Content Recommender</h1>
+    <input type="text" id="anime_watched" placeholder="Enter the name of the anime you watched">
+    <button onclick="getRecommendations()">Get Recommendations</button>
+    <div id="recommendations"></div>
+
+    <script>
+        async function getRecommendations() {
+            const animeWatched = document.getElementById('anime_watched').value;
+            const response = await fetch(`/recommend?anime_watched=${animeWatched}`);
+            const recommendations = await response.json();
+            document.getElementById('recommendations').innerText = `Recommendations: ${recommendations.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
